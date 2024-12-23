@@ -6,6 +6,7 @@ import ProjectForm from '../components/ProjectForm';
 import Navbar from '../components/Navbar';
 import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
+import Pagination from '../components/Pagination';
 
 const HomePage = () => {
     const dispatch = useDispatch();
@@ -16,10 +17,19 @@ const HomePage = () => {
     const [editingProject, setEditingProject] = useState(null);
     const [showLogin, setShowLogin] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
+    
+    const [currentPage, setCurrentPage] = useState(1);
+    const projectsPerPage = 6;
 
     useEffect(() => {
         dispatch(getProjects());
     }, [dispatch]);
+
+    const indexOfLastProject = currentPage * projectsPerPage;
+    const indexOfFirstProject = indexOfLastProject - projectsPerPage;
+    const currentProjects = projects.slice(indexOfFirstProject, indexOfLastProject);
+
+    const paginate = pageNumber => setCurrentPage(pageNumber);
 
     return (
         <div>
@@ -29,12 +39,13 @@ const HomePage = () => {
                     <button className="btn btn-primary mb-4" onClick={() => setShowProjectForm(true)}>Add Project</button>
                 )}
                 <div className="row">
-                    {projects.map(project => (
+                    {currentProjects.map(project => (
                         <div className="col-md-4" key={project._id}>
                             <ProjectCard project={project} setEditingProject={setEditingProject} setShowProjectForm={setShowProjectForm} />
                         </div>
                     ))}
                 </div>
+                <Pagination currentPage={currentPage} totalPages={Math.ceil(projects.length / projectsPerPage)} paginate={paginate} />
             </div>
             <ProjectForm
                 show={showProjectForm}
