@@ -1,1 +1,1 @@
-export const baseUrl = "http://localhost:5000"
+export const baseUrl = "http://localhost:5000" || "https://projects-jsr029-backend.vercel.app"
