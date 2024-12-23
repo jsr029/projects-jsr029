@@ -7,6 +7,7 @@ import Navbar from '../components/Navbar';
 import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
 import Pagination from '../components/Pagination';
+import Footer from '../components/Footer';
 
 const HomePage = () => {
     const dispatch = useDispatch();
@@ -54,6 +55,7 @@ const HomePage = () => {
             />
             <LoginForm show={showLogin} setShow={setShowLogin} />
             <RegisterForm show={showRegister} setShow={setShowRegister} />
+            <Footer />
         </div>
     );
 };
