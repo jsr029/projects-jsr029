@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
+import { baseUrl } from '../baseUrl';
 
 const RegisterForm = ({ show, setShow }) => {
     const [email, setEmail] = useState('');
@@ -11,7 +12,7 @@ const RegisterForm = ({ show, setShow }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('/api/auth/register', { email, password });
+            await axios.post(baseUrl+'/api/auth/register', { email, password });
             setSuccess('Registration successful');
             setError(null); // Clear error if registration is successful
             setShow(false);
