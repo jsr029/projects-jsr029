@@ -19,7 +19,7 @@ const HomePage = () => {
     const [showRegister, setShowRegister] = useState(false);
     
     const [currentPage, setCurrentPage] = useState(1);
-    const projectsPerPage = 6;
+    const projectsPerPage = 3;
 
     useEffect(() => {
         dispatch(getProjects());
