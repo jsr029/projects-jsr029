@@ -15,7 +15,7 @@ const Footer = () => {
                         <h5 className="text-uppercase">Contact</h5>
                         <ul className="list-unstyled mb-0">
                             <li>
-                                <a href="mailto:support@example.com" className="text-dark">support@example.com</a>
+                                <a href="mailto:support@example.com" className="text-dark">jsr059@gmail.com</a>
                             </li>
                             <li>
                                 <a href="tel:+1234567890" className="text-dark">+33 06.65.32.50.36</a>
