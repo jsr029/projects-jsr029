@@ -1,34 +1,47 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const dotenv = require('dotenv');
-dotenv.config();
+const http = require('http');
+const app = require('./app');
 
-const app = express();
+const normalizePort = val => {
+    const port = parseInt(val,10);
 
-app.use(cors());
-app.use(express.json());
+    if (isNaN(port)) {
+        return val;
+    }
+    if (port >= 0) {
+        return port;
+    }
+    return false;
+};
+const port = normalizePort(process.env.PORT || '5000');
+app.set('port',port);
 
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/users', require('./routes/user'));
-app.use('/api/projects', require('./routes/project'));
-
-const PORT = process.env.PORT || 5000;
-
-const connectDB = async () => {
-    try {
-        await mongoose.connect(process.env.MONGO_URI);
-        console.log('MongoDB Connected');
-    } catch (err) {
-        console.error(err.message);
-        process.exit(1);
+const errorHandler = error => {
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
+    const address = server.address();
+    const bind = typeof address === 'string' ? 'pipe ' + address : 'port: ' + port;
+    switch (error.code) {
+        case 'EACCES':
+            console.error(bind + ' requires elevated privileges.');
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(bind + ' is already in use.');
+            process.exit(1);
+            break;
+        default:
+            throw error;
     }
 };
 
-const startServer = () => {
-    app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-    });
-};
+const server = http.createServer(app);
 
-connectDB().then(startServer).catch(err => console.log(err));
+server.on('error',errorHandler);
+server.on('listening',() => {
+    const address = server.address();
+    const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + port;
+    console.log('Listening on ' + bind);
+});
+
+server.listen(port);
