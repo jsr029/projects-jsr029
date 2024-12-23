@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteProject } from '../redux/actions';
 import { Link } from 'react-router-dom';
+import "../css/styles.css"
 
 const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
     const auth = useSelector(state => state.auth);
