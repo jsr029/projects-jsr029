@@ -8,7 +8,7 @@ const Footer = () => {
                     <div className="col-lg-6 col-md-12 mb-4 mb-md-0">
                         <h5 className="text-uppercase">A propos</h5>
                         <p>
-                            Cette application MERN liste certains projets effectués montrant l'évolution du code.
+                            Cette application MERN listera une dizaine de projets effectués, montrant l'évolution du code, chronologiquement dans le désordre.
                         </p>
                     </div>
                     <div className="col-lg-6 col-md-12 mb-4 mb-md-0">
