@@ -19,16 +19,20 @@ const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
 
     return (
         <div className="card mb-3">
-            <img src={project.imageUrl} className="card-img-top" alt={project.title} />
-            <div className="card-body">
+            <img src={project.imageUrl} className="card-img-top" alt={project.title} height={200}/>
+            <div className="card-body" style={{height: "300px"}}>
                 <h5 className="card-title ellipsis-title" style={{
                     maxWidth: '390px',
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis'
                 }}>{project.title}</h5>
-                <p className="card-text">{project.description}</p>
-                <a href={project.appUrl} className="card-text" target="_blank" rel="noopener noreferrer">{project.appUrl}</a>
+                <p className="card-text" style={{height: "120px"}}>{project.description}</p>
+                <p style={{width: '390px', overflow:'hidden'}}><a href={project.appUrl} className="card-text" target="_blank" rel="noopener noreferrer" style={{
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis'
+                }}>{project.appUrl}</a></p>
                 <Link to={`/project/${project._id}`} className="btn btn-primary">View Project</Link>
                 {auth.isAuthenticated && auth.user && (auth.user.role === 'admin' || auth.user.role === 'superAdmin') && (
                     <>
