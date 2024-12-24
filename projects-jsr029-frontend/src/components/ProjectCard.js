@@ -18,7 +18,7 @@ const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
     };
 
     return (
-        <div className="card mb-3">
+        <div className="card mb-3 sc">
             <img src={project.imageUrl} className="card-img-top" alt={project.title} height={200}/>
             <div className="card-body" style={{height: "300px"}}>
                 <h5 className="card-title ellipsis-title" style={{
