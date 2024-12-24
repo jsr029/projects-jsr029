@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
+import Footer from '../components/Footer';
 
 const ProjectViewPage = () => {
     const { id } = useParams();
@@ -38,6 +39,7 @@ const ProjectViewPage = () => {
             </div>
             <LoginForm show={showLogin} setShow={setShowLogin} />
             <RegisterForm show={showRegister} setShow={setShowRegister} />
+            <Footer />
         </div>
     );
 };
