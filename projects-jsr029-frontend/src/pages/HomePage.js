@@ -37,7 +37,7 @@ const HomePage = () => {
             <Navbar setShowLogin={setShowLogin} setShowRegister={setShowRegister} />
             <div className="container mt-4">
                 {auth.isAuthenticated && auth.user && (auth.user.role === 'admin' || auth.user.role === 'superAdmin') && (
-                    <button className="btn btn-primary mb-4" onClick={() => setShowProjectForm(true)}>Add Project</button>
+                    <button className="btn btn-primary mb-4" onClick={() => setShowProjectForm(true)}>Ajouter un Projet</button>
                 )}
                 <div className="row">
                     {currentProjects.map(project => (

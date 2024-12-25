@@ -18,15 +18,15 @@ const Navbar = ({ setShowLogin, setShowRegister }) => {
                     {!auth.isAuthenticated ? (
                         <>
                             <li className="nav-item">
-                                <button className="btn btn-link nav-link" onClick={() => setShowLogin(true)}>Login</button>
+                                <button className="btn btn-link nav-link" onClick={() => setShowLogin(true)}>se Loguer</button>
                             </li>
                             <li className="nav-item">
-                                <button className="btn btn-link nav-link" onClick={() => setShowRegister(true)}>Register</button>
+                                <button className="btn btn-link nav-link" onClick={() => setShowRegister(true)}>s'enregistrer</button>
                             </li>
                         </>
                     ) : (
                         <li className="nav-item">
-                            <button className="btn btn-link nav-link" onClick={handleLogout}>Logout</button>
+                            <button className="btn btn-link nav-link" onClick={handleLogout}>sortir</button>
                         </li>
                     )}
                 </ul>
