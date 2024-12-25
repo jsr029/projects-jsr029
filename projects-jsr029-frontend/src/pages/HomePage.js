@@ -19,6 +19,7 @@ const HomePage = () => {
     const [showLogin, setShowLogin] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
     
+    const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const projectsPerPage = 3;
 
@@ -26,9 +27,14 @@ const HomePage = () => {
         dispatch(getProjects());
     }, [dispatch]);
 
+    const filteredProjects = projects.filter(project =>
+        project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        project.description.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     const indexOfLastProject = currentPage * projectsPerPage;
     const indexOfFirstProject = indexOfLastProject - projectsPerPage;
-    const currentProjects = projects.slice(indexOfFirstProject, indexOfLastProject);
+    const currentProjects = filteredProjects.slice(indexOfFirstProject, indexOfLastProject);
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
@@ -36,6 +42,13 @@ const HomePage = () => {
         <div>
             <Navbar setShowLogin={setShowLogin} setShowRegister={setShowRegister} />
             <div className="container mt-4">
+                <input
+                    type="text"
+                    placeholder="Search by title or description"
+                    className="form-control mb-4"
+                    value={searchTerm}
+                    onChange={e => setSearchTerm(e.target.value)}
+                />
                 {auth.isAuthenticated && auth.user && (auth.user.role === 'admin' || auth.user.role === 'superAdmin') && (
                     <button className="btn btn-primary mb-4" onClick={() => setShowProjectForm(true)}>Ajouter un Projet</button>
                 )}
@@ -46,7 +59,7 @@ const HomePage = () => {
                         </div>
                     ))}
                 </div>
-                <Pagination currentPage={currentPage} totalPages={Math.ceil(projects.length / projectsPerPage)} paginate={paginate} />
+                <Pagination currentPage={currentPage} totalPages={Math.ceil(filteredProjects.length / projectsPerPage)} paginate={paginate} />
             </div>
             <ProjectForm
                 show={showProjectForm}
