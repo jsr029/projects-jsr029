@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProjects } from '../redux/actions';
 import ProjectCard from '../components/ProjectCard';
@@ -40,6 +41,22 @@ const HomePage = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Home - Project Management</title>
+                <meta name="description" content="Browse and manage your projects efficiently." />
+                <meta name="keywords" content="projects, management, task management, team collaboration" />
+                <script type="application/ld+json">
+                    {`
+                    {
+                        "@context": "http://schema.org",
+                        "@type": "WebPage",
+                        "name": "Project Management Home",
+                        "description": "Browse and manage your projects efficiently.",
+                        "url": "https://yourwebsite.com/home"
+                    }
+                    `}
+                </script>
+            </Helmet>
             <Navbar setShowLogin={setShowLogin} setShowRegister={setShowRegister} />
             <div className="container mt-4">
                 <input
