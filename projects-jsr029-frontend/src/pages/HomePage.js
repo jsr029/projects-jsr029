@@ -44,7 +44,7 @@ const HomePage = () => {
             <div className="container mt-4">
                 <input
                     type="text"
-                    placeholder="Search by title or description"
+                    placeholder="Rechercher par titre ou description"
                     className="form-control mb-4"
                     value={searchTerm}
                     onChange={e => setSearchTerm(e.target.value)}

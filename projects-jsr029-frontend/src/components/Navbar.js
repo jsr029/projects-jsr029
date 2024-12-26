@@ -12,7 +12,7 @@ const Navbar = ({ setShowLogin, setShowRegister }) => {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand" href="/">Project Manager</a>
+            <a className="navbar-brand" href="/">Mes Projets</a>
             <div className="collapse navbar-collapse">
                 <ul className="navbar-nav ml-auto">
                     {!auth.isAuthenticated ? (
