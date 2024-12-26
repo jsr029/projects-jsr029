@@ -4,8 +4,6 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import HomePage from './pages/HomePage';
 import ProjectViewPage from './pages/ProjectViewPage';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 function App() {
     return (
