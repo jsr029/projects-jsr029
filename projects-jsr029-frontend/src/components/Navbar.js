@@ -19,15 +19,15 @@ const CustomNavbar = ({ setShowLogin, setShowRegister }) => {
                 <Nav className="ml-auto">
                     {!auth.isAuthenticated ? (
                         <>
-                            <Nav.Item>
+                            <Nav.Item className="custom-nav-item">
                                 <Button variant="link" onClick={() => setShowLogin(true)}>se Loguer</Button>
                             </Nav.Item>
-                            <Nav.Item>
+                            <Nav.Item className="custom-nav-item">
                                 <Button variant="link" onClick={() => setShowRegister(true)}>s'enregistrer</Button>
                             </Nav.Item>
                         </>
                     ) : (
-                        <Nav.Item>
+                        <Nav.Item className="custom-nav-item">
                             <Button variant="link" onClick={handleLogout}>sortir</Button>
                         </Nav.Item>
                     )}

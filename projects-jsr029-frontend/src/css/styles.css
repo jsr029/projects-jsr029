@@ -2,3 +2,21 @@
     transform: scale(1.1);
     transition: transform 0.3s ease-in-out;
 }
+.custom-nav-item {
+    margin: 0 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.custom-nav-item .btn-link {
+    color: white;
+    font-weight: bold;
+    font-size: 1.1em;
+    text-decoration: none;
+}
+
+.custom-nav-item .btn-link:hover {
+    color: #ffdf00; /* Gold color on hover */
+    background-color: rgba(255, 255, 255, 0.1); /* Light background on hover */
+    transform: scale(1.1); /* Slightly enlarge on hover */
+    text-decoration: underline;
+}
