@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/ResumePage.css';
-import { Navbar } from 'react-bootstrap';
+import Navbar from '../components/Navbar'
 
 const ResumePage = () => {
     return (
