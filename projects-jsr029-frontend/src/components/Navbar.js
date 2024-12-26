@@ -19,7 +19,7 @@ const CustomNavbar = ({ setShowLogin, setShowRegister }) => {
             <Navbar.Collapse id="navbar-nav">
                 <Nav className="ml-auto">
                     <Nav.Item className="custom-nav-item">
-                        <button><Nav.Link as={Link} to="/cv">CV</Nav.Link></button>
+                        <Nav.Link as={Link} to="/cv">CV</Nav.Link>
                     </Nav.Item>
                     {!auth.isAuthenticated ? (
                         <>
