@@ -22,7 +22,7 @@ const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
             <img src={project.imageUrl} className="card-img-top" alt={project.title} height={200}/>
             <div className="card-body" style={{height: "300px"}}>
                 <h5 className="card-title ellipsis-title" style={{
-                    maxWidth: '390px',
+                    maxWidth: '320px',
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis'
@@ -34,11 +34,11 @@ const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
                     textOverflow: 'ellipsis',
                     textAlign: "justify"
                 }}>{project.description.substring(0, 200)}...</p>
-                <p style={{width: '390px', overflow:'hidden'}}><a href={project.appUrl} className="card-text" target="_blank" rel="noopener noreferrer" style={{
+                <p style={{width: '320px', overflow:'hidden'}}><a href={project.appUrl} className="card-text" target="_blank" rel="noopener noreferrer" style={{
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
-                    width: "350px",
+                    width: "320px",
                     display: "block"
                 }}>{project.appUrl}</a></p>
                 <Link to={`/project/${project._id}`} className="btn btn-primary">Voir</Link>
