@@ -29,7 +29,6 @@ const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
                 }}>{project.title}</h5>
                 <p className="card-text" style={{
                     width: '350px',
-                    whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis'
                 }}>{project.description.substring(0, 200)} </p>
