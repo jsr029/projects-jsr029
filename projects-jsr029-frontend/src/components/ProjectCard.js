@@ -22,23 +22,23 @@ const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
             <img src={project.imageUrl} className="card-img-top" alt={project.title} height={200}/>
             <div className="card-body" style={{height: "300px"}}>
                 <h5 className="card-title ellipsis-title" style={{
-                    maxWidth: '320px',
+                    maxWidth: '350px',
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis'
                 }}>{project.title}</h5>
                 <p className="card-text" style={{
                     height: "120px",
-                    width: '320px',
+                    width: '350px',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                     textAlign: "justify"
                 }}>{project.description.substring(0, 200)}...</p>
-                <p style={{width: '320px', overflow:'hidden'}}><a href={project.appUrl} className="card-text" target="_blank" rel="noopener noreferrer" style={{
+                <p style={{width: '350px', overflow:'hidden'}}><a href={project.appUrl} className="card-text" target="_blank" rel="noopener noreferrer" style={{
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
-                    width: "320px",
+                    width: "350px",
                     display: "block"
                 }}>{project.appUrl}</a></p>
                 <Link to={`/project/${project._id}`} className="btn btn-primary">Voir</Link>
