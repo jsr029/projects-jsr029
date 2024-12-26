@@ -29,7 +29,7 @@ const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
                 }}>{project.title}</h5>
                 <p className="card-text" style={{
                     height: "120px",
-                    width: '380px',
+                    maxWidth: '380px',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                     textAlign: "justify"
@@ -38,7 +38,7 @@ const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
-                    width: "380px",
+                    maxWidth: "380px",
                     display: "block"
                 }}>{project.appUrl}</a></p>
                 <Link to={`/project/${project._id}`} className="btn btn-primary">Voir</Link>
