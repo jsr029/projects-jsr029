@@ -54,7 +54,7 @@ const HomePage = () => {
                 )}
                 <div className="row">
                     {currentProjects.map(project => (
-                        <div className="col-md-4" key={project._id}>
+                        <div className="col-md-3" key={project._id}>
                             <ProjectCard project={project} setEditingProject={setEditingProject} setShowProjectForm={setShowProjectForm} />
                         </div>
                     ))}
