@@ -32,7 +32,8 @@ const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                     width: "350px",
-                    display: "block"
+                    display: "block",
+                    maxWidth: "200ch"
                 }}>{project.description}</p>
                 <p style={{width: '390px', overflow:'hidden'}}><a href={project.appUrl} className="card-text" target="_blank" rel="noopener noreferrer" style={{
                     whiteSpace: 'nowrap',
