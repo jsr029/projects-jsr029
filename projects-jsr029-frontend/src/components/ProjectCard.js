@@ -27,7 +27,7 @@ const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
                     overflow: 'hidden',
                     textOverflow: 'ellipsis'
                 }}>{project.title}</h5>
-                <p className="card-text" style={{height: "120px",
+                <p className="card-text" style={{
                     whiteSpace: 'wrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
