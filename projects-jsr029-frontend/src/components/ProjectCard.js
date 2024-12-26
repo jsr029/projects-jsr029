@@ -27,7 +27,13 @@ const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
                     overflow: 'hidden',
                     textOverflow: 'ellipsis'
                 }}>{project.title}</h5>
-                <p className="card-text" style={{height: "120px"}}>{project.description}</p>
+                <p className="card-text" style={{height: "120px",
+                    whiteSpace: 'wrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    width: "350px",
+                    display: "block"
+                }}>{project.description}</p>
                 <p style={{width: '390px', overflow:'hidden'}}><a href={project.appUrl} className="card-text" target="_blank" rel="noopener noreferrer" style={{
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
