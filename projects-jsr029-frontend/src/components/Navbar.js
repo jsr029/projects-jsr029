@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Navbar, Nav, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { logout } from '../redux/actions';
 
 const CustomNavbar = ({ setShowLogin, setShowRegister }) => {
@@ -17,6 +18,9 @@ const CustomNavbar = ({ setShowLogin, setShowRegister }) => {
             <Navbar.Toggle aria-controls="navbar-nav" />
             <Navbar.Collapse id="navbar-nav">
                 <Nav className="ml-auto">
+                    <Nav.Item className="custom-nav-item">
+                        <Nav.Link as={Link} to="/resume">CV</Nav.Link>
+                    </Nav.Item>
                     {!auth.isAuthenticated ? (
                         <>
                             <Nav.Item className="custom-nav-item">
@@ -38,3 +42,4 @@ const CustomNavbar = ({ setShowLogin, setShowRegister }) => {
 };
 
 export default CustomNavbar;
+
