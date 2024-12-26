@@ -7,32 +7,32 @@ const ResumePage = () => {
     return (
         <>
             <Navbar />
-            <div>
+            <div style={{marginTop: "45px"}}>
                 <div className="resume-container">
                     <header className="resume-header">
-                        <h1>John Doe</h1>
-                        <p>Software Engineer</p>
-                        <p>Email: john.doe@example.com | Phone: (123) 456-7890</p>
+                        <h1>Jean-Sébastien Rakotonirina</h1>
+                        <p>Développeur d'Applications</p>
+                        <p>Email: jsr059@gmail.com | Phone: (+33) 06.65.32.50.36</p>
                     </header>
 
                     <section className="resume-section">
                         <h2>Experience</h2>
                         <div className="resume-item">
-                            <h3>Senior Software Engineer</h3>
-                            <p>ABC Company | Jan 2020 - Present</p>
+                            <h3>Développeur d'Appications et Dev UX</h3>
+                            <p>Benomads.fr | août 2024 - Present</p>
                             <ul>
-                                <li>Developed and maintained web applications using React and Node.js</li>
-                                <li>Collaborated with cross-functional teams to define project requirements</li>
-                                <li>Implemented new features and optimized existing ones for performance</li>
+                                <li>Créer des prototypes figma pour rendre la navigation intuitive</li>
+                                <li>Développer des micro services comme à l'inscription l'application se crée automatiquement</li>
+                                <li>Node, mongo, express, react, docker, github, gitlab, vscode, ubuntu</li>
                             </ul>
                         </div>
                         <div className="resume-item">
-                            <h3>Software Engineer</h3>
-                            <p>XYZ Company | Jun 2016 - Dec 2019</p>
+                            <h3>Développeur Filemaker et Filemaker Server</h3>
+                            <p>Consultant | août 2024 - octobre 2024</p>
                             <ul>
-                                <li>Worked on backend development using Python and Django</li>
-                                <li>Designed and implemented RESTful APIs for various services</li>
-                                <li>Participated in code reviews and mentored junior developers</li>
+                                <li>Créer une application Filemaker</li>
+                                <li>Utiliser les APIs de 2 sites web redmine et jira en créant mes propres APIs</li>
+                                <li>Filemaker Pro et Server, Nodejs</li>
                             </ul>
                         </div>
                     </section>
@@ -40,12 +40,8 @@ const ResumePage = () => {
                     <section className="resume-section">
                         <h2>Education</h2>
                         <div className="resume-item">
-                            <h3>Master of Science in Computer Science</h3>
-                            <p>University of Technology | 2014 - 2016</p>
-                        </div>
-                        <div className="resume-item">
-                            <h3>Bachelor of Science in Computer Science</h3>
-                            <p>University of Technology | 2010 - 2014</p>
+                            <h3>Bac+3/4</h3>
+                            <p>OpenClassRooms | 2021 - 2022</p>
                         </div>
                     </section>
 
@@ -55,17 +51,17 @@ const ResumePage = () => {
                             <li>JavaScript</li>
                             <li>React</li>
                             <li>Node.js</li>
-                            <li>Python</li>
-                            <li>Django</li>
+                            <li>Express</li>
+                            <li>Mongo</li>
                             <li>SQL</li>
                         </ul>
                     </section>
 
                     <section className="resume-section">
                         <h2>Contact</h2>
-                        <p>Email: john.doe@example.com</p>
-                        <p>LinkedIn: linkedin.com/in/johndoe</p>
-                        <p>GitHub: github.com/johndoe</p>
+                        <p>Email: jsr059@gmail.com</p>
+                        <p>LinkedIn: www.linkedin.com/in/rakotonirinajeansebastien</p>
+                        <p>GitHub: https://github.com/jsr029</p>
                     </section>
                 </div>
             </div>
