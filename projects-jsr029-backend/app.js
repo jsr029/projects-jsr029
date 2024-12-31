@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path')
 const cors = require('cors');
 const dotenv = require('dotenv');
 dotenv.config();
@@ -18,7 +19,7 @@ app.use((req,res,next) => {
     res.setHeader('Access-Control-Allow-Methods','GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
-
+app.use('/images', express.static(path.join(__dirname, '../projects-jsr029-backend/images')));
 app.use(express.json());
 
 app.use('/api/auth', require('./routes/auth'));

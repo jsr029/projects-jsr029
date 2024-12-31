@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteProject } from '../redux/actions';
 import { Link } from 'react-router-dom';
 import '../css/styles.css'; // Make sure to import the CSS file
+import { baseUrl } from '../baseUrl';
 
 const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
     const auth = useSelector(state => state.auth);
@@ -19,8 +20,7 @@ const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
 
     return (
         <div className="card mb-3 sc">
-            <img src={project.imageUrl} className="card-img-top" alt={project.title} height={200}/>
-            <div className="card-body" style={{height: "300px"}}>
+            <img src={`${baseUrl}${project.imageUrl}`} className="card-img-top" alt={project.title} height={200}/>            <div className="card-body" style={{height: "300px"}}>
                 <h5 className="card-title ellipsis-title" style={{
                     maxWidth: '380px',
                     whiteSpace: 'nowrap',
