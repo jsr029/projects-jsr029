@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const path = require('path')
 const cors = require('cors');
 const dotenv = require('dotenv');
+const bodyParser = require('body-parser');
 dotenv.config();
 
 mongoose.set('strictQuery', false);
@@ -21,6 +22,12 @@ app.use((req,res,next) => {
 });
 app.use('/images', express.static(path.join(__dirname, '../projects-jsr029-backend/images')));
 app.use(express.json());
+
+const sendEmail = require('./mail');
+
+app.use(bodyParser.json());
+
+app.post('/api/contact', sendEmail);
 
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/users', require('./routes/user'));
