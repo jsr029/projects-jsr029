@@ -35,26 +35,58 @@ router.get('/:id', async (req, res) => {
 
 router.put('/:id', auth, auth.isAdmin, upload.single('image'), async (req, res) => {
   const { title, appUrl, techno, description } = req.body;
-  const imageUrl = req.file ? `/images/${req.file.filename}` : undefined;
+  const imageUrl = req.file ? `/uploads/${req.file.filename}` : undefined;
 
   const updatedData = {
-    title,
-    appUrl,
-    techno,
-    description,
+      title,
+      appUrl,
+      techno,
+      description,
   };
 
   if (imageUrl) {
-    updatedData.imageUrl = imageUrl;
+      updatedData.imageUrl = imageUrl;
   }
 
-  const project = await Project.findByIdAndUpdate(req.params.id, updatedData, { new: true });
-  res.json(project);
+  try {
+      const project = await Project.findById(req.params.id);
+      if (!project) {
+          return res.status(404).send({ error: 'Project not found.' });
+      }
+
+      if (req.file && project.imageUrl) {
+          fs.unlink(path.join(__dirname, '..', project.imageUrl), (err) => {
+              if (err) console.error('Failed to delete old image:', err);
+          });
+      }
+
+      const updatedProject = await Project.findByIdAndUpdate(req.params.id, updatedData, { new: true });
+      res.json(updatedProject);
+  } catch (err) {
+      console.error(err);
+      res.status(500).send({ error: 'Server error' });
+  }
 });
 
 router.delete('/:id', auth, auth.isAdmin, async (req, res) => {
-  await Project.findByIdAndDelete(req.params.id);
-  res.json({ msg: 'Project deleted' });
+  try {
+      const project = await Project.findById(req.params.id);
+      if (!project) {
+          return res.status(404).send({ error: 'Project not found.' });
+      }
+
+      if (project.imageUrl) {
+          fs.unlink(path.join(__dirname, '..', project.imageUrl), (err) => {
+              if (err) console.error('Failed to delete image:', err);
+          });
+      }
+
+      await Project.findByIdAndDelete(req.params.id);
+      res.json({ msg: 'Project deleted' });
+  } catch (err) {
+      console.error(err);
+      res.status(500).send({ error: 'Server error' });
+  }
 });
 
 module.exports = router;
