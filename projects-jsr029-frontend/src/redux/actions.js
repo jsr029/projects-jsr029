@@ -23,7 +23,7 @@ export const addProject = (project) => async dispatch => {
     try {
         const res = await axios.post(baseUrl+'/api/projects', project, {
             headers: {
-                'x-auth-token': localStorage.getItem('token')
+                'authorization': localStorage.getItem('token')
             }
         });
         dispatch({ type: ADD_PROJECT, payload: res.data });
@@ -36,7 +36,7 @@ export const updateProject = (id, project) => async dispatch => {
     try {
         const res = await axios.put(baseUrl+`/api/projects/${id}`, project, {
             headers: {
-                'x-auth-token': localStorage.getItem('token')
+                'authorization': localStorage.getItem('token')
             }
         });
         dispatch({ type: UPDATE_PROJECT, payload: res.data });
@@ -49,7 +49,7 @@ export const deleteProject = (id) => async dispatch => {
     try {
         await axios.delete(baseUrl+`/api/projects/${id}`, {
             headers: {
-                'x-auth-token': localStorage.getItem('token')
+                'authorization': localStorage.getItem('token')
             }
         });
         dispatch({ type: DELETE_PROJECT, payload: id });

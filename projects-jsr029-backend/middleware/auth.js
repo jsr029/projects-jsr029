@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 module.exports = function(req, res, next) {
-    let token = req.headers["x-access-token"];
+    let token = req.headers["authorization"];
     if (!token) return res.status(401).json({ msg: 'No token, authorization denied' });
 
     try {
