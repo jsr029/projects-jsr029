@@ -1,12 +1,13 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Navbar, Nav, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { logout } from '../redux/actions';
 
 const CustomNavbar = ({ setShowLogin, setShowRegister }) => {
     const auth = useSelector(state => state.auth);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         dispatch(logout());
@@ -19,7 +20,13 @@ const CustomNavbar = ({ setShowLogin, setShowRegister }) => {
             <Navbar.Collapse id="navbar-nav">
                 <Nav className="ml-auto">
                     <Nav.Item className="custom-nav-item">
-                        <Nav.Link as={Link} to="/cv" className='btn btn-link' type="button" style={{textAlign:"left", marginLeft: "15px"}}>CV</Nav.Link>
+                        <Button 
+                            className='btn btn-link cv-link' 
+                            type="button" 
+                            onClick={() => navigate('/cv')}
+                        >
+                            CV
+                        </Button>
                     </Nav.Item>
                     {!auth.isAuthenticated ? (
                         <>
@@ -42,4 +49,3 @@ const CustomNavbar = ({ setShowLogin, setShowRegister }) => {
 };
 
 export default CustomNavbar;
-

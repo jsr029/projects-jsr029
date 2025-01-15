@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProjects } from '../redux/actions';
 import { useParams } from 'react-router-dom';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/CustomNavbar';
 import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
 import Footer from '../components/Footer';

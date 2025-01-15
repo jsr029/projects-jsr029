@@ -14,7 +14,7 @@
     text-decoration: none;
 }
 
-.custom-nav-item .btn-link:hover {
+.custom-nav-item .btn-link:hover, .cv-link:hover {
     color: #ffdf00; /* Gold color on hover */
     background-color: rgba(255, 255, 255, 0.1); /* Light background on hover */
     transform: scale(1.1); /* Slightly enlarge on hover */

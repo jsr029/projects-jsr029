@@ -1,13 +1,14 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/ResumePage.css';
-import Navbar from '../components/Navbar'
+import CustomNavbar from '../components/CustomNavbar'; // Updated import
 
-const ResumePage = () => {
+const ResumePage = ({ setShowLogin, setShowRegister }) => {
+
     return (
         <>
-            <Navbar />
-            <div style={{marginTop: "45px"}}>
+            <CustomNavbar setShowLogin={setShowLogin} setShowRegister={setShowRegister} />  {/* Pass the props */}
+            <div style={{ marginTop: "45px" }}>
                 <div className="resume-container">
                     <header className="resume-header">
                         <h1>Jean-Sébastien Rakotonirina</h1>
@@ -70,4 +71,3 @@ const ResumePage = () => {
 };
 
 export default ResumePage;
-

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProjects } from '../redux/actions';
 import ProjectCard from '../components/ProjectCard';
 import ProjectForm from '../components/ProjectForm';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/CustomNavbar';
 import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
 import Pagination from '../components/Pagination';
