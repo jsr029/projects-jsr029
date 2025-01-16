@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProjects } from '../redux/actions';
 import ProjectCard from '../components/ProjectCard';
 import ProjectForm from '../components/ProjectForm';
-import Navbar from '../components/CustomNavbar';
 import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
 import Pagination from '../components/Pagination';
@@ -40,7 +39,7 @@ const HomePage = () => {
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
     return (
-        <div>
+        <div style={{marginTop: "5rem"}}>
             <Helmet>
                 <title>Accueil - mes Projets</title>
                 <meta name="description" content="Liste de mes projets, mongodb, express, react, node. Rakotonirina Jean-Sébastien" />
@@ -57,7 +56,6 @@ const HomePage = () => {
                     `}
                 </script>
             </Helmet>
-            <Navbar setShowLogin={setShowLogin} setShowRegister={setShowRegister} />
             <div className="container mt-4">
                 <input
                     type="text"
