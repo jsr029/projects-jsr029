@@ -29,7 +29,8 @@ const HomePage = () => {
 
     const filteredProjects = projects.filter(project =>
         project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        project.description.toLowerCase().includes(searchTerm.toLowerCase())
+        project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        project.techno.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     const indexOfLastProject = currentPage * projectsPerPage;
