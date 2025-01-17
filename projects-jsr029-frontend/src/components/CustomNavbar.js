@@ -15,14 +15,14 @@ const CustomNavbar = ({ setShowLogin, setShowRegister }) => {
 
     return (
         <Navbar expand={false} bg="dark" variant="dark" fixed="top" collapseOnSelect>
-            <Navbar.Brand href="/">Mes Projets</Navbar.Brand>
+            <Navbar.Brand onClick={() => navigate('/')} >Mes Projets</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbar-nav" />
             <Navbar.Collapse id="navbar-nav">
                 <Nav className="ml-auto">
                     <Nav.Item className="custom-nav-item">
                         <Button 
+                            variant="link"
                             className='btn btn-link cv-link' 
-                            type="button" 
                             onClick={() => navigate('/cv')}
                         >
                             CV

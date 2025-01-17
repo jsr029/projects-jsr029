@@ -1,13 +1,11 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/ResumePage.css';
-import CustomNavbar from '../components/CustomNavbar';
 import Footer from '../components/Footer';  // Import Footer
 
-const ResumePage = ({ setShowLogin, setShowRegister }) => {
+const ResumePage = () => {
     return (
         <>
-            <CustomNavbar setShowLogin={setShowLogin} setShowRegister={setShowRegister} />
             <div style={{ marginTop: "45px" }}>
                 <div className="resume-container">
                     <header className="resume-header">

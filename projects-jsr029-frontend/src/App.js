@@ -19,7 +19,8 @@ function App() {
                 <CustomNavbar setShowLogin={setShowLogin} setShowRegister={setShowRegister} />
                 <Routes>
                     <Route exact path="/" element={<HomePage />} />
-                    <Route path="/cv" element={<ResumePage setShowLogin={setShowLogin} setShowRegister={setShowRegister} />} />                    <Route path="/project/:id" element={<ProjectViewPage />} />
+                    <Route path="/cv" element={<ResumePage />} /> 
+                    <Route path="/project/:id" element={<ProjectViewPage />} />
                 </Routes>
                 <LoginForm show={showLogin} setShow={setShowLogin} /> {/* Use the LoginForm component */}
                 <RegisterForm show={showRegister} setShow={setShowRegister} /> {/* Use the LoginForm component */}

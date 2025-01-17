@@ -40,7 +40,7 @@ const HomePage = () => {
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
     return (
-        <div style={{marginTop: "5rem"}}>
+        <div style={{ marginTop: "5rem" }}>
             <Helmet>
                 <title>Accueil - mes Projets</title>
                 <meta name="description" content="Liste de mes projets, mongodb, express, react, node. Rakotonirina Jean-Sébastien" />

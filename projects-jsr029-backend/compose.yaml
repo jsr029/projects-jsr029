@@ -1,58 +1,38 @@
-# Comments are provided throughout this file to help you get started.
-# If you need more help, visit the Docker compose reference guide at
-# https://docs.docker.com/compose/compose-file/
-
-# Here the instructions define your application as a service called "server".
-# This service is built from the Dockerfile in the current directory.
-# You can add other services your application may depend on here, such as a
-# database or a cache. For examples, see the Awesome Compose repository:
-# https://github.com/docker/awesome-compose
-services:
-
-  # BACKEND SERVER MACHINE NAME
-  rnsback:
-    build:
-      context: . # Building Docker file from '.' the current repository
-    depends_on:
-      - mongodb
-    networks:
-      - mongo-private-tunnel
-    environment:
-      MONGO_USER: $MONGO_USER
-      MONGO_PASSWORD: $MONGO_PASSWORD
-      MONGO_URL: $MONGO_URL
-      APP_PORT: $APP_PORT
-  # MONGODB MACHINE NAME
-  mongodb:
-    image: mongo
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: $MONGO_USER
-      MONGO_INITDB_ROOT_PASSWORD: $MONGO_PASSWORD
-      MONGO_INITDB_DATABASE: test
-    # Exposer le port de mongo publiquement
-    #ports:
-    #  - 0.0.0.0:27017:27017
-    networks:
-      - mongo-private-tunnel
-
-  # N'exposé mongo que quand vous etes en devellopement
-  # MONGODB-EXPRESS MACHINE NAME
-  mongo-express:
-    image: mongo-express
-    restart: always
-    depends_on:
-      - mongodb
+version: '3' # docker-compose version
+services: # services which our app going to use (list of containers we want to create)
+  mongoCont: # container name 
+    image: mongo # which image container will build on
     ports:
-      - 8082:8081
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: $MONGO_USER
-      ME_CONFIG_MONGODB_ADMINPASSWORD: $MONGO_PASSWORD
-      ME_CONFIG_MONGODB_URL: mongodb://${MONGO_USER}:${MONGO_PASSWORD}@mongodb:27017
-      ME_CONFIG_BASICAUTH: false
-    networks:
-      - mongo-private-tunnel
+      - "27017:27017"
+    networks: # adding network
+      - mern-app
+    volumes:
+      - mongo-data:/data/db
 
+  api-server:
+    build: . # build the Docker image for the service using the Dockerfile located in the current directory
+    ports:
+      - "5000:5000"
+    networks: # adding network
+      - mern-app
+    depends_on:
+      - mongoCont
+    environment: # Include environment variables directly in the service
+      - PORT=$PORT
+      - MONGO_URI=$MONGO_URI
+      - JWT_SECRET=$JWT_SECRET
+      - MONGO_USER=$MONGO_USER
+      - MONGO_PASSWORD=$MONGO_PASSWORD
+      - APP_PORT=$APP_PORT
+      - MONGO_DB=$MONGO_DB
+      - MONGO_URL=$MONGO_URL
+      - EMAIL_USER=$EMAIL_USER
+      - EMAIL_PASS=$EMAIL_PASS
 
-networks:
-  mongo-private-tunnel:
+networks: # allow services to talk to each other while providing isolation from other docker container, running on the same host
+  mern-app:
+    driver: bridge
+
+volumes: # enable persistence of database data across container restart
+  mongo-data:
+    driver: local
