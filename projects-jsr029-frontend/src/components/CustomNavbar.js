@@ -26,7 +26,7 @@ const CustomNavbar = ({ setShowLogin, setShowRegister }) => {
                     <Nav.Item className="custom-nav-item">
                         <Button 
                             variant="link"
-                            className="btn btn-link cv-link nav-button" 
+                            className="nav-button" 
                             onClick={() => handleNavigate('/cv')}
                         >
                             CV
