@@ -13,9 +13,13 @@ const CustomNavbar = ({ setShowLogin, setShowRegister }) => {
         dispatch(logout());
     };
 
+    const handleNavigate = (path) => {
+        navigate(path);
+    };
+
     return (
         <Navbar expand={false} bg="dark" variant="dark" fixed="top" collapseOnSelect>
-            <Navbar.Brand onClick={() => navigate('/')}>Mes Projets</Navbar.Brand>
+            <Navbar.Brand onClick={() => handleNavigate('/')}>Mes Projets</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbar-nav" />
             <Navbar.Collapse id="navbar-nav">
                 <Nav className="ml-auto">
@@ -23,7 +27,7 @@ const CustomNavbar = ({ setShowLogin, setShowRegister }) => {
                         <Button 
                             variant="link"
                             className="btn btn-link cv-link nav-button" 
-                            onClick={() => navigate('/cv')}
+                            onClick={() => handleNavigate('/cv')}
                         >
                             CV
                         </Button>
@@ -67,4 +71,3 @@ const CustomNavbar = ({ setShowLogin, setShowRegister }) => {
 };
 
 export default CustomNavbar;
-
