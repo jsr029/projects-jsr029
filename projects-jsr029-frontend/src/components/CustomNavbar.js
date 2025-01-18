@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { logout } from '../redux/actions';
 
 const CustomNavbar = ({ setShowLogin, setShowRegister }) => {
-    const auth = useSelector(state => state.auth);
+    const { isAuthenticated } = useSelector(state => state.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -15,31 +15,49 @@ const CustomNavbar = ({ setShowLogin, setShowRegister }) => {
 
     return (
         <Navbar expand={false} bg="dark" variant="dark" fixed="top" collapseOnSelect>
-            <Navbar.Brand onClick={() => navigate('/')} >Mes Projets</Navbar.Brand>
+            <Navbar.Brand onClick={() => navigate('/')}>Mes Projets</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbar-nav" />
             <Navbar.Collapse id="navbar-nav">
                 <Nav className="ml-auto">
                     <Nav.Item className="custom-nav-item">
                         <Button 
                             variant="link"
-                            className='btn btn-link cv-link' 
+                            className="btn btn-link cv-link nav-button" 
                             onClick={() => navigate('/cv')}
                         >
                             CV
                         </Button>
                     </Nav.Item>
-                    {!auth.isAuthenticated ? (
+                    {!isAuthenticated ? (
                         <>
                             <Nav.Item className="custom-nav-item">
-                                <Button variant="link" onClick={() => setShowLogin(true)}>se Loguer</Button>
+                                <Button 
+                                    variant="link" 
+                                    className="nav-button" 
+                                    onClick={() => setShowLogin(true)}
+                                >
+                                    Se Loguer
+                                </Button>
                             </Nav.Item>
                             <Nav.Item className="custom-nav-item">
-                                <Button variant="link" onClick={() => setShowRegister(true)}>s'enregistrer</Button>
+                                <Button 
+                                    variant="link" 
+                                    className="nav-button" 
+                                    onClick={() => setShowRegister(true)}
+                                >
+                                    S'enregistrer
+                                </Button>
                             </Nav.Item>
                         </>
                     ) : (
                         <Nav.Item className="custom-nav-item">
-                            <Button variant="link" onClick={handleLogout}>sortir</Button>
+                            <Button 
+                                variant="link" 
+                                className="nav-button" 
+                                onClick={handleLogout}
+                            >
+                                Sortir
+                            </Button>
                         </Nav.Item>
                     )}
                 </Nav>
@@ -49,3 +67,4 @@ const CustomNavbar = ({ setShowLogin, setShowRegister }) => {
 };
 
 export default CustomNavbar;
+
