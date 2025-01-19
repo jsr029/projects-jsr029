@@ -12,7 +12,7 @@ const RegisterForm = ({ show, setShow }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(baseUrl+'/api/auth/register', { email, password });
+            await axios.post(`${baseUrl}/api/auth/register`, { email, password });
             setSuccess('Registration successful');
             setError(null); // Clear error if registration is successful
             setShow(false);
@@ -31,13 +31,25 @@ const RegisterForm = ({ show, setShow }) => {
                 {error && <Alert variant="danger">{error}</Alert>}
                 {success && <Alert variant="success">{success}</Alert>}
                 <Form onSubmit={handleSubmit}>
-                    <Form.Group>
+                    <Form.Group controlId="formEmail">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                        <Form.Control 
+                            type="email" 
+                            value={email} 
+                            onChange={(e) => setEmail(e.target.value)} 
+                            required 
+                            aria-describedby="emailHelp"
+                        />
                     </Form.Group>
-                    <Form.Group>
+                    <Form.Group controlId="formPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                        <Form.Control 
+                            type="password" 
+                            value={password} 
+                            onChange={(e) => setPassword(e.target.value)} 
+                            required 
+                            aria-describedby="passwordHelp"
+                        />
                     </Form.Group>
                     <Button variant="primary" type="submit">
                         Register

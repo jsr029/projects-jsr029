@@ -28,12 +28,26 @@ const LoginForm = ({ show, setShow }) => {
                 {error && <Alert variant="danger">{error}</Alert>}
                 <Form onSubmit={handleSubmit}>
                     <Form.Group>
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                        <Form.Label htmlFor="email">Email</Form.Label>
+                        <Form.Control 
+                            id="email" 
+                            type="email" 
+                            value={email} 
+                            onChange={(e) => setEmail(e.target.value)} 
+                            required 
+                            aria-describedby="emailHelp" 
+                        />
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                        <Form.Label htmlFor="password">Password</Form.Label>
+                        <Form.Control 
+                            id="password" 
+                            type="password" 
+                            value={password} 
+                            onChange={(e) => setPassword(e.target.value)} 
+                            required 
+                            aria-describedby="passwordHelp"
+                        />
                     </Form.Group>
                     <Button variant="primary" type="submit">
                         Login

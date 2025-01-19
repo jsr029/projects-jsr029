@@ -51,3 +51,40 @@
     margin: 5px 10px 5px 0;
     border-radius: 5px;
 }
+.main-container {
+    margin-top: 45px;
+}
+
+.resume-container {
+    padding: 20px;
+}
+
+.resume-header, .resume-section {
+    margin-bottom: 20px;
+}
+
+.resume-header h1 {
+    font-size: 2rem;
+}
+
+.resume-header p {
+    margin: 0;
+}
+
+.resume-section h2 {
+    font-size: 1.5rem;
+}
+
+.resume-item h3 {
+    font-size: 1.25rem;
+}
+
+.skills-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.skills-list li {
+    display: inline-block;
+    margin-right: 10px;
+}

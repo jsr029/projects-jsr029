@@ -1,17 +1,26 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/ResumePage.css';
-import Footer from '../components/Footer';  // Import Footer
+import Footer from '../components/Footer';
+import { Helmet } from 'react-helmet';
 
 const ResumePage = () => {
     return (
         <>
-            <div style={{ marginTop: "45px" }}>
+            <Helmet>
+                <title>Resume - Jean-Sébastien Rakotonirina</title>
+                <meta name="description" content="Resume of Jean-Sébastien Rakotonirina, Application Developer." />
+                <meta name="keywords" content="Resume, Jean-Sébastien Rakotonirina, Application Developer, JavaScript, React, Node.js" />
+                <meta property="og:title" content="Resume - Jean-Sébastien Rakotonirina" />
+                <meta property="og:description" content="Resume of Jean-Sébastien Rakotonirina, Application Developer." />
+                <meta property="og:type" content="website" />
+            </Helmet>
+            <div className="main-container" style={{ marginTop: "45px" }}>
                 <div className="resume-container">
                     <header className="resume-header">
                         <h1>Jean-Sébastien Rakotonirina</h1>
                         <p>Développeur d'Applications</p>
-                        <p>Email: jsr059@gmail.com | Phone: (+33) 06.65.32.50.36</p>
+                        <p>Email: <a href="mailto:jsr059@gmail.com">jsr059@gmail.com</a> | Phone: <a href="tel:+330665985036">(+33) 06.65.32.50.36</a></p>
                     </header>
 
                     <section className="resume-section">
@@ -58,13 +67,13 @@ const ResumePage = () => {
 
                     <section className="resume-section">
                         <h2>Contact</h2>
-                        <p>Email: jsr059@gmail.com</p>
-                        <p>LinkedIn: www.linkedin.com/in/rakotonirinajeansebastien</p>
-                        <p>GitHub: https://github.com/jsr029</p>
+                        <p>Email: <a href="mailto:jsr059@gmail.com">jsr059@gmail.com</a></p>
+                        <p>LinkedIn: <a href="https://www.linkedin.com/in/rakotonirinajeansebastien" target="_blank" rel="noopener noreferrer">www.linkedin.com/in/rakotonirinajeansebastien</a></p>
+                        <p>GitHub: <a href="https://github.com/jsr029" target="_blank" rel="noopener noreferrer">https://github.com/jsr029</a></p>
                     </section>
                 </div>
             </div>
-            <Footer />  {/* Add the Footer component */}
+            <Footer />
         </>
     );
 };

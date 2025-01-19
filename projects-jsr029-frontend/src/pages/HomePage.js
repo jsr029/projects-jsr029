@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
+import { Helmet } from 'react-helmet';
 import { getProjects } from '../redux/actions';
 import ProjectCard from '../components/ProjectCard';
 import ProjectForm from '../components/ProjectForm';
@@ -11,14 +11,13 @@ import Footer from '../components/Footer';
 
 const HomePage = () => {
     const dispatch = useDispatch();
-    const projects = useSelector(state => state.projects);
+    const { projects, error, success } = useSelector(state => state.projects);
     const auth = useSelector(state => state.auth);
 
     const [showProjectForm, setShowProjectForm] = useState(false);
     const [editingProject, setEditingProject] = useState(null);
     const [showLogin, setShowLogin] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
-    
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const projectsPerPage = 3;
@@ -58,12 +57,25 @@ const HomePage = () => {
                 </script>
             </Helmet>
             <div className="container mt-4">
+                {error && (
+                    <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                        {error}
+                        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                )}
+                {success && (
+                    <div className="alert alert-success alert-dismissible fade show" role="alert">
+                        {success}
+                        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                )}
                 <input
                     type="text"
                     placeholder="Rechercher par titre ou description"
                     className="form-control mb-4"
                     value={searchTerm}
                     onChange={e => setSearchTerm(e.target.value)}
+                    aria-label="Search Projects"
                 />
                 {auth.isAuthenticated && auth.user && (auth.user.role === 'admin' || auth.user.role === 'superAdmin') && (
                     <button className="btn btn-primary mb-4" onClick={() => setShowProjectForm(true)}>Ajouter un Projet</button>

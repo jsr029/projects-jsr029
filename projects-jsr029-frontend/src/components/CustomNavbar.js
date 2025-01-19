@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -9,13 +9,13 @@ const CustomNavbar = ({ setShowLogin, setShowRegister }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleLogout = () => {
+    const handleLogout = useCallback(() => {
         dispatch(logout());
-    };
+    }, [dispatch]);
 
-    const handleNavigate = (path) => {
+    const handleNavigate = useCallback((path) => {
         navigate(path);
-    };
+    }, [navigate]);
 
     return (
         <Navbar expand={false} bg="dark" variant="dark" fixed="top" collapseOnSelect>

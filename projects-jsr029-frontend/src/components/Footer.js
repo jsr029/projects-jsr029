@@ -13,18 +13,20 @@ const Footer = () => {
                     </div>
                     <div className="col-lg-6 col-md-12 mb-4 mb-md-0">
                         <h5 className="text-uppercase">Contact</h5>
-                        <ul className="list-unstyled mb-0">
-                            <li>
-                                <a href="mailto:jsr029@gmail.com" className="text-dark">jsr059@gmail.com</a>
-                            </li>
-                            <li>
-                                <a href="tel:+330665985036" className="text-dark">+33 06.65.32.50.36</a>
-                            </li>
-                        </ul>
+                        <address>
+                            <ul className="list-unstyled mb-0">
+                                <li>
+                                    <a href="mailto:jsr029@gmail.com" className="text-dark">jsr059@gmail.com</a>
+                                </li>
+                                <li>
+                                    <a href="tel:+330665985036" className="text-dark">+33 06.65.32.50.36</a>
+                                </li>
+                            </ul>
+                        </address>
                     </div>
                 </div>
             </div>
-            <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+            <div className="text-center p-3 footer-bg">
                 &copy; {new Date().getFullYear()} Jean-Sébastien Rakotonirina. tous droits réservés.
             </div>
         </footer>
