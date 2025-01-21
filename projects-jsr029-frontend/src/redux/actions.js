@@ -8,23 +8,23 @@ export const DELETE_PROJECT = 'DELETE_PROJECT';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT = 'LOGOUT';
-export const PROJECT_ERROR = 'PROJECT_ERROR'; // New action type for project errors
-export const PROJECT_SUCCESS = 'PROJECT_SUCCESS'; // New action type for project success
+export const PROJECT_ERROR = 'PROJECT_ERROR';
+export const PROJECT_SUCCESS = 'PROJECT_SUCCESS';
 
 const setAuthHeaders = () => ({
     headers: {
-        'authorization': localStorage.getItem('token')
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
     }
 });
 
 // Action creators
 export const getProjects = () => async dispatch => {
     try {
-        const res = await axios.get(`${baseUrl}/api/projects`);
+        const res = await axios.get(`${baseUrl}/api/projects`, setAuthHeaders());
         dispatch({ type: GET_PROJECTS, payload: res.data });
         dispatch({ type: PROJECT_SUCCESS, payload: 'Projects fetched successfully' });
     } catch (err) {
-        console.error(err);
+        console.error('Failed to fetch projects:', err);
         dispatch({ type: PROJECT_ERROR, payload: 'Failed to fetch projects' });
     }
 };
@@ -35,7 +35,7 @@ export const addProject = (project) => async dispatch => {
         dispatch({ type: ADD_PROJECT, payload: res.data });
         dispatch({ type: PROJECT_SUCCESS, payload: 'Project added successfully' });
     } catch (err) {
-        console.error(err);
+        console.error('Failed to add project:', err);
         dispatch({ type: PROJECT_ERROR, payload: 'Failed to add project' });
     }
 };
@@ -46,7 +46,7 @@ export const updateProject = (id, project) => async dispatch => {
         dispatch({ type: UPDATE_PROJECT, payload: res.data });
         dispatch({ type: PROJECT_SUCCESS, payload: 'Project updated successfully' });
     } catch (err) {
-        console.error(err);
+        console.error('Failed to update project:', err);
         dispatch({ type: PROJECT_ERROR, payload: 'Failed to update project' });
     }
 };
@@ -57,7 +57,7 @@ export const deleteProject = (id) => async dispatch => {
         dispatch({ type: DELETE_PROJECT, payload: id });
         dispatch({ type: PROJECT_SUCCESS, payload: 'Project deleted successfully' });
     } catch (err) {
-        console.error(err);
+        console.error('Failed to delete project:', err);
         dispatch({ type: PROJECT_ERROR, payload: 'Failed to delete project' });
     }
 };
@@ -74,7 +74,7 @@ export const login = (credentials) => async dispatch => {
         dispatch({ type: PROJECT_SUCCESS, payload: 'Login successful' });
     } catch (err) {
         dispatch({ type: AUTH_ERROR });
-        console.error(err);
+        console.error('Failed to login:', err);
         dispatch({ type: PROJECT_ERROR, payload: 'Failed to login' });
     }
 };
@@ -90,7 +90,7 @@ export const register = (userData) => async dispatch => {
         dispatch({ type: PROJECT_SUCCESS, payload: 'Registration successful' });
     } catch (err) {
         dispatch({ type: AUTH_ERROR });
-        console.error(err);
+        console.error('Failed to register:', err);
         dispatch({ type: PROJECT_ERROR, payload: 'Failed to register' });
     }
 };
