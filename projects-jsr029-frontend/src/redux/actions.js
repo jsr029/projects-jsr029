@@ -31,7 +31,7 @@ export const getProjects = () => async dispatch => {
 
 export const addProject = (project) => async dispatch => {
     try {
-        const res = await axios.post(`${baseUrl}/api/projects`, project, setAuthHeaders());
+        const res = await axios.post(`${baseUrl}/api/projects/create`, project, setAuthHeaders());
         dispatch({ type: ADD_PROJECT, payload: res.data });
         dispatch({ type: PROJECT_SUCCESS, payload: 'Project added successfully' });
     } catch (err) {
@@ -42,7 +42,7 @@ export const addProject = (project) => async dispatch => {
 
 export const updateProject = (id, project) => async dispatch => {
     try {
-        const res = await axios.put(`${baseUrl}/api/projects/${id}`, project, setAuthHeaders());
+        const res = await axios.put(`${baseUrl}/api/projects/edit/${id}`, project, setAuthHeaders());
         dispatch({ type: UPDATE_PROJECT, payload: res.data });
         dispatch({ type: PROJECT_SUCCESS, payload: 'Project updated successfully' });
     } catch (err) {

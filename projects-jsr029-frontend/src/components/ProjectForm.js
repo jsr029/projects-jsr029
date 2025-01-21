@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addProject, updateProject } from '../redux/actions';
 import { Modal, Button, Form } from 'react-bootstrap';
+import axios from 'axios';
+import { baseUrl } from '../baseUrl';
 
 const ProjectForm = ({ show, setShow, editingProject }) => {
     const [title, setTitle] = useState('');
@@ -31,13 +33,25 @@ const ProjectForm = ({ show, setShow, editingProject }) => {
         formData.append('description', description);
         if (image) formData.append('image', image);
 
-        if (editingProject) {
-            dispatch(updateProject(editingProject._id, formData));
-        } else {
-            dispatch(addProject(formData));
-        }
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}` // Ensure token is included
+                }
+            };
 
-        setShow(false);
+            if (editingProject) {
+                await axios.put(`${baseUrl}/api/projects/edit/${editingProject._id}`, formData, config);
+                dispatch(updateProject(editingProject._id, formData));
+            } else {
+                await axios.post(`${baseUrl}/api/projects/create`, formData, config);
+                dispatch(addProject(formData));
+            }
+            setShow(false);
+        } catch (error) {
+            console.error('Error submitting project:', error);
+        }
     };
 
     return (
