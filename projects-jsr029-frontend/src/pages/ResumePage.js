@@ -22,12 +22,31 @@ const ResumePage = () => {
                         <p>Développeur d'Applications</p>
                         <p>Email: <a href="mailto:jsr059@gmail.com">jsr059@gmail.com</a> | Phone: <a href="tel:+330665985036">(+33) 06.65.32.50.36</a></p>
                     </header>
+                        <div className="resume-item">
+                            <h3>Créateur de drones</h3>
+                            <p>Pour un pays étranger | janvier 2025 - à ce jour</p>
+                            <ul>
+                                <li>Modéliser des drones sous Solidworks</li>
+                                <li>Créer la documentation</li>
+                                <li>Créer un prototype</li>
+                                <li>Prise en charge par les investisseurs du traducteur et des drones, en cours</li>
+                            </ul>
+                        </div>
 
                     <section className="resume-section">
                         <h2>Experience</h2>
                         <div className="resume-item">
+                            <h3>Créateur d'un traducteur de Braille</h3>
+                            <p>Pour moi | janvier 2025 - avril 2025</p>
+                            <ul>
+                                <li>Modéliser sous Solidworks</li>
+                                <li>Connecter les différents composants</li>
+                                <li>Imprimer en 3D avec Chitubox</li>
+                            </ul>
+                        </div>
+                        <div className="resume-item">
                             <h3>Développeur d'Appications et Dev UX (Bénévolat)</h3>
-                            <p>Pour Benomads.fr | août 2024 - Present</p>
+                            <p>Pour Benomads.fr | août 2024 - janvier 2025</p>
                             <ul>
                                 <li>Créer des prototypes figma pour rendre la navigation intuitive</li>
                                 <li>Développer des micro services comme à l'inscription l'application se crée automatiquement</li>
