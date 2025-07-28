@@ -30,7 +30,7 @@ const ResumePage = () => {
                         <h2>Projets récents</h2>
                         <div className="resume-item">
                             <h3>Créateur de drones</h3>
-                            <p>Projet personnel pour un pays étranger | Janvier 2025 - Aujourd'hui</p>
+                            <p>Projet personnel pour un pays étranger | Avril 2025 - Aujourd'hui</p>
                             <ul>
                                 <li>Modélisation des drones sous Solidworks</li>
                                 <li>Rédaction de la documentation</li>
@@ -109,4 +109,3 @@ const ResumePage = () => {
 };
 
 export default ResumePage;
-
