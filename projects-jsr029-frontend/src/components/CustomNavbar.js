@@ -10,29 +10,33 @@ const CustomNavbar = ({ setShowLogin, setShowRegister }) => {
   const dispatch = useDispatch();
 
   return (
-    <Navbar bg="dark" variant="dark" expand={false} fixed="top">
+    <Navbar bg="dark" variant="dark" expand={false} fixed="top" className="py-3">
       <Container>
-        <Navbar.Brand as={Link} to="/">JSR029</Navbar.Brand>
-        
-        {/* Burger toujours visible */}
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        
-        {/* Menu qui apparaît dans le burger sur TOUS les écrans */}
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link as={Link} to="/">Accueil</Nav.Link>
-            <Nav.Link as={Link} to="/cv">CV</Nav.Link>
-          </Nav>
-          <Nav>
+        <Navbar.Brand as={Link} to="/" className="fw-bold">JSR029</Navbar.Brand>
+
+        {/* Burger toujours visible sur TOUS les écrans */}
+        <Navbar.Toggle aria-controls="navbar-nav" />
+
+        <Navbar.Collapse id="navbar-nav">
+          <Nav className="ms-auto">
+            <Nav.Link as={Link} to="/" className="text-white">Accueil</Nav.Link>
+            <Nav.Link as={Link} to="/cv" className="text-white">CV</Nav.Link>
+
             {isAuthenticated ? (
               <>
-                <Nav.Link disabled>{user?.role || 'Admin'}</Nav.Link>
-                <Nav.Link onClick={() => dispatch(logout())}>Déconnexion</Nav.Link>
+                <Nav.Link disabled className="text-info">{user?.role}</Nav.Link>
+                <Nav.Link onClick={() => dispatch(logout())} className="text-warning">
+                  Déconnexion
+                </Nav.Link>
               </>
             ) : (
               <>
-                <Nav.Link onClick={() => setShowLogin(true)}>Connexion</Nav.Link>
-                <Nav.Link onClick={() => setShowRegister(true)}>Inscription</Nav.Link>
+                <Nav.Link onClick={() => setShowLogin(true)} className="text-white">
+                  Connexion
+                </Nav.Link>
+                <Nav.Link onClick={() => setShowRegister(true)} className="text-white">
+                  Inscription
+                </Nav.Link>
               </>
             )}
           </Nav>
