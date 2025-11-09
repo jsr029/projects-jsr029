@@ -17,21 +17,45 @@ const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
     }
   };
 
+  // URL de l'image : si c'est déjà une URL complète → on l'utilise telle quelle
+  // sinon → on ajoute baseUrl (compatibilité ancienne version)
+  const imageSrc = project.imageUrl.startsWith('http') 
+    ? project.imageUrl 
+    : `${baseUrl}${project.imageUrl}`;
+
   return (
     <Card className="h-100 shadow-sm">
-      <Card.Img variant="top" src={`${baseUrl}``${project.imageUrl}`} alt={project.title} style={{ height: '200px', objectFit: 'cover' }} />
+      <Card.Img 
+        variant="top" 
+        src={imageSrc} 
+        alt={project.title} 
+        style={{ height: '200px', objectFit: 'cover' }} 
+      />
       <Card.Body className="d-flex flex-column">
         <Card.Title>{project.title}</Card.Title>
-        <Card.Text className="flex-grow-1">{project.description.substring(0, 100)}...</Card.Text>
+        <Card.Text className="flex-grow-1">
+          {project.description.substring(0, 100)}...
+        </Card.Text>
         <Card.Text><small className="text-muted">{project.techno}</small></Card.Text>
         <div className="mt-auto">
-          <Link to={`/project/${project._id}`} className="btn btn-outline-primary btn-sm me-2">Voir</Link>
+          <Link to={`/project/${project._id}`} className="btn btn-outline-primary btn-sm me-2">
+            Voir
+          </Link>
           {isAdmin && (
             <>
-              <Button size="sm" variant="warning" onClick={() => { setEditingProject(project); setShowProjectForm(true); }}>
+              <Button 
+                size="sm" 
+                variant="warning" 
+                onClick={() => { 
+                  setEditingProject(project); 
+                  setShowProjectForm(true); 
+                }}
+              >
                 Éditer
               </Button>
-              <Button size="sm" variant="danger" className="ms-2" onClick={handleDelete}>Supprimer</Button>
+              <Button size="sm" variant="danger" className="ms-2" onClick={handleDelete}>
+                Supprimer
+              </Button>
             </>
           )}
         </div>
