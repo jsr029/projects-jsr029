@@ -3,7 +3,6 @@ import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteProject } from '../redux/actions';
-// import { baseUrl } from '../baseUrl';  ← SUPPRIME CETTE LIGNE
 import { Link } from 'react-router-dom';
 import { baseUrl } from '../baseUrl';
 
