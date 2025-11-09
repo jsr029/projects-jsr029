@@ -19,9 +19,10 @@ const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
 
   // URL de l'image : si c'est déjà une URL complète → on l'utilise telle quelle
   // sinon → on ajoute baseUrl (compatibilité ancienne version)
+  const url = "https://projects-jsr029-frontend.vercel.app";
   const imageSrc = project.imageUrl.startsWith('http') 
     ? project.imageUrl 
-    : `${baseUrl}${project.imageUrl}`;
+    : `${url}${project.imageUrl}`;
 
   return (
     <Card className="h-100 shadow-sm">
