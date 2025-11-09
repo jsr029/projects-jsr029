@@ -20,9 +20,9 @@ const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
 
   return (
     <Card className="h-100 shadow-sm">
-      <Card.Img 
-        variant="top" 
+      <img 
         src={`${baseUrl}${project.imageUrl}`} 
+        className="card-img-top"
         alt={project.title} 
         style={{ height: '200px', objectFit: 'cover' }} 
       />
