@@ -1,63 +1,40 @@
+// src/components/RegisterForm.js
 import React, { useState } from 'react';
-import axios from 'axios';
-import { Modal, Button, Form, Alert } from 'react-bootstrap';
-import { baseUrl } from '../baseUrl';
+import { Modal, Form, Button, Alert } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { register } from '../redux/actions';
 
-const RegisterForm = ({ show, setShow }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
-    const [success, setSuccess] = useState(null);
+const RegisterForm = ({ show, onHide }) => {
+  const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const dispatch = useDispatch();
+  const { error } = useSelector(state => state.auth);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            await axios.post(`${baseUrl}/api/auth/register`, { email, password });
-            setSuccess('Registration successful');
-            setError(null); // Clear error if registration is successful
-            setShow(false);
-        } catch (err) {
-            setError('Registration failed');
-            setSuccess(null); // Clear success if registration fails
-        }
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(register(credentials));
+  };
 
-    return (
-        <Modal show={show} onHide={() => setShow(false)}>
-            <Modal.Header closeButton>
-                <Modal.Title>Register</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                {error && <Alert variant="danger">{error}</Alert>}
-                {success && <Alert variant="success">{success}</Alert>}
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group controlId="formEmail">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control 
-                            type="email" 
-                            value={email} 
-                            onChange={(e) => setEmail(e.target.value)} 
-                            required 
-                            aria-describedby="emailHelp"
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="formPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control 
-                            type="password" 
-                            value={password} 
-                            onChange={(e) => setPassword(e.target.value)} 
-                            required 
-                            aria-describedby="passwordHelp"
-                        />
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Register
-                    </Button>
-                </Form>
-            </Modal.Body>
-        </Modal>
-    );
+  return (
+    <Modal show={show} onHide={onHide}>
+      <Modal.Header closeButton><Modal.Title>Connexion</Modal.Title></Modal.Header>
+      <Form onSubmit={handleSubmit}>
+        <Modal.Body>
+          {error && <Alert variant="danger">{error}</Alert>}
+          <Form.Group className="mb-3">
+            <Form.Label>Email</Form.Label>
+            <Form.Control type="email" value={credentials.email} onChange={(e) => setCredentials({ ...credentials, email: e.target.value })} required />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Mot de passe</Form.Label>
+            <Form.Control type="password" value={credentials.password} onChange={(e) => setCredentials({ ...credentials, password: e.target.value })} required />
+          </Form.Group>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" type="submit">Se connecter</Button>
+        </Modal.Footer>
+      </Form>
+    </Modal>
+  );
 };
 
 export default RegisterForm;

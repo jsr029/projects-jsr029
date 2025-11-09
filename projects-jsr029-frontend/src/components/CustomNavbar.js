@@ -12,8 +12,8 @@ const CustomNavbar = ({ setShowLogin, setShowRegister }) => {
     <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
       <Container>
         <Navbar.Brand as={Link} to="/">JSR029</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Toggle />
+        <Navbar.Collapse>
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Accueil</Nav.Link>
             <Nav.Link as={Link} to="/cv">CV</Nav.Link>

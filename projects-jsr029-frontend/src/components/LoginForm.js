@@ -1,61 +1,40 @@
+// src/components/LoginForm.js
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { Modal, Form, Button, Alert } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../redux/actions';
-import { Modal, Button, Form, Alert } from 'react-bootstrap';
 
-const LoginForm = ({ show, setShow }) => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
-    const dispatch = useDispatch();
+const LoginForm = ({ show, onHide }) => {
+  const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const dispatch = useDispatch();
+  const { error } = useSelector(state => state.auth);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            await dispatch(login({ email, password }));
-            setShow(false);
-        } catch (err) {
-            setError('Invalid credentials');
-        }
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(login(credentials));
+  };
 
-    return (
-        <Modal show={show} onHide={() => setShow(false)}>
-            <Modal.Header closeButton>
-                <Modal.Title>Login</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                {error && <Alert variant="danger">{error}</Alert>}
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group>
-                        <Form.Label htmlFor="email">Email</Form.Label>
-                        <Form.Control 
-                            id="email" 
-                            type="email" 
-                            value={email} 
-                            onChange={(e) => setEmail(e.target.value)} 
-                            required 
-                            aria-describedby="emailHelp" 
-                        />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label htmlFor="password">Password</Form.Label>
-                        <Form.Control 
-                            id="password" 
-                            type="password" 
-                            value={password} 
-                            onChange={(e) => setPassword(e.target.value)} 
-                            required 
-                            aria-describedby="passwordHelp"
-                        />
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Login
-                    </Button>
-                </Form>
-            </Modal.Body>
-        </Modal>
-    );
+  return (
+    <Modal show={show} onHide={onHide}>
+      <Modal.Header closeButton><Modal.Title>Connexion</Modal.Title></Modal.Header>
+      <Form onSubmit={handleSubmit}>
+        <Modal.Body>
+          {error && <Alert variant="danger">{error}</Alert>}
+          <Form.Group className="mb-3">
+            <Form.Label>Email</Form.Label>
+            <Form.Control type="email" value={credentials.email} onChange={(e) => setCredentials({ ...credentials, email: e.target.value })} required />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Mot de passe</Form.Label>
+            <Form.Control type="password" value={credentials.password} onChange={(e) => setCredentials({ ...credentials, password: e.target.value })} required />
+          </Form.Group>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" type="submit">Se connecter</Button>
+        </Modal.Footer>
+      </Form>
+    </Modal>
+  );
 };
 
 export default LoginForm;

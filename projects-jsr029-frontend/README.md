@@ -3,8 +3,11 @@
 ```javascript
 projects-jsr029-frontend/
 │
+├── vercel.json                     ← FIX routing + build
+├── package.json                    ← Nettoyé + fonctionnel
 ├── public/
-│   └── index.html
+│   ├── index.html
+│   └── manifest.json
 ├── src/
 │   ├── components/
 │   │   ├── CustomNavbar.js
@@ -28,6 +31,5 @@ projects-jsr029-frontend/
 │   ├── baseUrl.js
 │   ├── App.js
 │   └── index.js
-├── package.json
-└── vercel.json
+└── .gitignore
 ```
