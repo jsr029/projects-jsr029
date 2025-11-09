@@ -61,36 +61,33 @@ router.post('/create', auth, auth.isAdmin, upload.single('image'), async (req, r
 
 // PUT modifier un projet
 router.put('/edit/:id', auth, auth.isAdmin, upload.single('image'), async (req, res) => {
-    try {
-        const updates = {
-            title: req.body.title,
-            appUrl: req.body.appUrl,
-            techno: req.body.techno,
-            description: req.body.description
-        };
+  try {
+    const project = await Project.findById(req.params.id);
+    if (!project) return res.status(404).json({ error: 'Projet non trouvé' });
 
-        if (req.file) {
-            const { url } = await put(`projects/${Date.now()}-${req.file.originalname}`, req.file.buffer, {
-                access: 'public',
-                token: process.env.PROJECTS_JSR029_READ_WRITE_TOKEN
-            });
-            updates.imageUrl = url;
-        }
+    // Mise à jour des champs texte
+    project.title = req.body.title || project.title;
+    project.appUrl = req.body.appUrl || project.appUrl;
+    project.techno = req.body.techno || project.techno;
+    project.description = req.body.description || project.description;
 
-        const project = await Project.findByIdAndUpdate(
-            req.params.id,
-            updates,
-            { new: true }
-        );
-
-        if (!project) return res.status(404).json({ error: 'Projet non trouvé' });
-        res.json(project);
-    } catch (err) {
-        console.error('Erreur PUT /edit/:id:', err);
-        res.status(500).json({ error: 'Erreur serveur' });
+    // SEULEMENT si une nouvelle image est uploadée
+    if (req.file) {
+      const { url } = await put(`projects/${Date.now()}-${req.file.originalname}`, req.file.buffer, {
+        access: 'public',
+        token: process.env.BLOB_READ_WRITE_TOKEN
+      });
+      project.imageUrl = url; // remplace l'ancienne image
     }
-});
+    // Sinon → on garde l'ancienne imageUrl
 
+    await project.save();
+    res.json({ success: 'Projet mis à jour', project });
+  } catch (err) {
+    console.error('Erreur update project:', err);
+    res.status(500).json({ error: 'Erreur serveur' });
+  }
+});
 // DELETE supprimer un projet
 router.delete('/:id', auth, auth.isAdmin, async (req, res) => {
     try {
