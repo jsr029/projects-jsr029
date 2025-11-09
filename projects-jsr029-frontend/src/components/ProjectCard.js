@@ -17,17 +17,12 @@ const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
     }
   };
 
-  // URL de l'image : si c'est déjà une URL complète → on l'utilise telle quelle
-  // sinon → on ajoute baseUrl (compatibilité ancienne version)
-  const url = "https://projects-jsr029-frontend.vercel.app";
-  const imageSrc = project.imageUrl 
-    ? `${url}${project.imageUrl}` : "https://via.placeholder.com/400x200?text=No+Image";
 
   return (
     <Card className="h-100 shadow-sm">
       <Card.Img 
         variant="top" 
-        src={imageSrc} 
+        src={`${baseUrl}${project.imageUrl}`} 
         alt={project.title} 
         style={{ height: '200px', objectFit: 'cover' }} 
       />
