@@ -6,7 +6,6 @@ import { register } from '../redux/actions';
 
 const RegisterForm = ({ show, onHide }) => {
   const [userData, setUserData] = useState({
-    name: '',        // AJOUTÉ
     email: '',
     password: '',
     role: 'user'
