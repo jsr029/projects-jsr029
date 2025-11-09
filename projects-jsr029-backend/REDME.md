@@ -1,6 +1,6 @@
 # Strusture du projet
 
-```json
+```javascript
 projects-jsr029-backend/
 │
 ├── vercel.json                     ← Configuration Vercel (OBLIGATOIRE)
