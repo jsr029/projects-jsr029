@@ -14,17 +14,19 @@ code {
 button{
   margin-right: 10px
 }
+/**
 nav .navbar-collapse {
   position: fixed;
   top: 56px;
   background: #343a40;
-  right: -100%; /* pull the menu out of the viewport from right */
+  right: -100%; 
   width: 100vw;
   height: 100vh;
   display: block;
-  transition: right 0.3s ease; /* transition for smooth sliding */
+  transition: right 0.3s ease; 
 }
 
 nav .navbar-collapse.show {
-  right: 0; /* push the menu back to viewport */
+  right: 0; 
 }
+*/
