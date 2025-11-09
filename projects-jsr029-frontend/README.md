@@ -1,4 +1,4 @@
-# Strudture du projet
+# Structure du projet
 
 ```javascript
 projects-jsr029-frontend/
