@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteProject } from '../redux/actions';
 // import { baseUrl } from '../baseUrl';  ← SUPPRIME CETTE LIGNE
 import { Link } from 'react-router-dom';
+import { baseUrl } from '../baseUrl';
 
 const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
 
   return (
     <Card className="h-100 shadow-sm">
-      <Card.Img variant="top" src={project.imageUrl} alt={project.title} style={{ height: '200px', objectFit: 'cover' }} />
+      <Card.Img variant="top" src={baseUrl + project.imageUrl} alt={project.title} style={{ height: '200px', objectFit: 'cover' }} />
       <Card.Body className="d-flex flex-column">
         <Card.Title>{project.title}</Card.Title>
         <Card.Text className="flex-grow-1">{project.description.substring(0, 100)}...</Card.Text>
