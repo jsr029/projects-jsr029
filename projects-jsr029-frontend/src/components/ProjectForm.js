@@ -3,11 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form, Spinner, Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProject, updateProject, getProjects } from '../redux/actions';
-import { baseUrl } from '../baseUrl';
 
 const ProjectForm = ({ show, setShow, editingProject }) => {
   const dispatch = useDispatch();
-  const { success, error } = useSelector(state => state.projects);
+  const { success } = useSelector(state => state.projects);
   const [formData, setFormData] = useState({
     title: '', appUrl: '', techno: '', description: '', image: null
   });

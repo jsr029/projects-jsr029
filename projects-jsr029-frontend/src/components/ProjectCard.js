@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteProject } from '../redux/actions';
-import { baseUrl } from '../baseUrl';
+// import { baseUrl } from '../baseUrl';  ← SUPPRIME CETTE LIGNE
 import { Link } from 'react-router-dom';
 
 const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
@@ -28,7 +28,9 @@ const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
           <Link to={`/project/${project._id}`} className="btn btn-outline-primary btn-sm me-2">Voir</Link>
           {isAdmin && (
             <>
-              <Button size="sm" variant="warning" onClick={() => { setEditingProject(project); setShowProjectForm(true); }}>Éditer</Button>
+              <Button size="sm" variant="warning" onClick={() => { setEditingProject(project); setShowProjectForm(true); }}>
+                Éditer
+              </Button>
               <Button size="sm" variant="danger" className="ms-2" onClick={handleDelete}>Supprimer</Button>
             </>
           )}
