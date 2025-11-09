@@ -37,7 +37,7 @@ router.post('/create', auth, auth.isAdmin, upload.single('image'), async (req, r
 
         const { url } = await put(`projects/${Date.now()}-${req.file.originalname}`, req.file.buffer, {
             access: 'public',
-            token: process.env.BLOB_READ_WRITE_TOKEN // Ajoute cette variable dans Vercel
+            token: process.env.PROJECTS_JSR029_READ_WRITE_TOKEN // Ajoute cette variable dans Vercel
         });
 
         const { title, appUrl, techno, description } = req.body;
@@ -72,7 +72,7 @@ router.put('/edit/:id', auth, auth.isAdmin, upload.single('image'), async (req, 
         if (req.file) {
             const { url } = await put(`projects/${Date.now()}-${req.file.originalname}`, req.file.buffer, {
                 access: 'public',
-                token: process.env.BLOB_READ_WRITE_TOKEN
+                token: process.env.PROJECTS_JSR029_READ_WRITE_TOKEN
             });
             updates.imageUrl = url;
         }
