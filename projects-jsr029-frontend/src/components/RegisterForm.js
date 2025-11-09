@@ -8,7 +8,7 @@ const RegisterForm = ({ show, onHide }) => {
   const [userData, setUserData] = useState({
     email: '',
     password: '',
-    role: 'user' // par défaut
+    role: 'user'
   });
 
   const dispatch = useDispatch();
@@ -21,14 +21,17 @@ const RegisterForm = ({ show, onHide }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(register(userData));
-    // Optionnel : fermer après succès
-    // if (!error) onHide();
   };
 
   return (
-    <Modal show={show} onHide={onHide} centered>
+    <Modal
+      show={show}
+      onHide={onHide}
+      centered
+      aria-labelledby="register-modal-title"
+    >
       <Modal.Header closeButton>
-        <Modal.Title>Inscription</Modal.Title>
+        <Modal.Title id="register-modal-title">Inscription</Modal.Title>
       </Modal.Header>
       <Form onSubmit={handleSubmit}>
         <Modal.Body>
@@ -67,9 +70,6 @@ const RegisterForm = ({ show, onHide }) => {
               <option value="admin">Admin</option>
               <option value="superAdmin">Super Admin</option>
             </Form.Select>
-            <Form.Text className="text-muted">
-              Seuls les superAdmins peuvent créer d'autres admins.
-            </Form.Text>
           </Form.Group>
         </Modal.Body>
 

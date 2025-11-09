@@ -16,10 +16,10 @@ const ProjectForm = ({ show, setShow, editingProject }) => {
   useEffect(() => {
     if (editingProject) {
       setFormData({
-        title: editingProject.title,
-        appUrl: editingProject.appUrl,
-        techno: editingProject.techno,
-        description: editingProject.description,
+        title: editingProject.title || '',
+        appUrl: editingProject.appUrl || '',
+        techno: editingProject.techno || '',
+        description: editingProject.description || '',
         image: null
       });
     } else {
@@ -63,14 +63,22 @@ const ProjectForm = ({ show, setShow, editingProject }) => {
   };
 
   return (
-    <Modal show={show} onHide={() => setShow(false)} size="lg">
+    <Modal
+      show={show}
+      onHide={() => setShow(false)}
+      size="lg"
+      aria-labelledby="project-modal-title"
+    >
       <Modal.Header closeButton>
-        <Modal.Title>{editingProject ? 'Modifier' : 'Ajouter'} un Projet</Modal.Title>
+        <Modal.Title id="project-modal-title">
+          {editingProject ? 'Modifier' : 'Ajouter'} un Projet
+        </Modal.Title>
       </Modal.Header>
       <Form onSubmit={handleSubmit}>
         <Modal.Body>
           {localError && <Alert variant="danger">{localError}</Alert>}
           {success && <Alert variant="success">{success}</Alert>}
+
           <Form.Group className="mb-3">
             <Form.Label>Titre</Form.Label>
             <Form.Control name="title" value={formData.title} onChange={handleChange} required />

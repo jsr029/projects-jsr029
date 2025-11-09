@@ -19,7 +19,7 @@ const ProjectCard = ({ project, setEditingProject, setShowProjectForm }) => {
 
   return (
     <Card className="h-100 shadow-sm">
-      <Card.Img variant="top" src={baseUrl + project.imageUrl} alt={project.title} style={{ height: '200px', objectFit: 'cover' }} />
+      <Card.Img variant="top" src={`${baseUrl}``${project.imageUrl}`} alt={project.title} style={{ height: '200px', objectFit: 'cover' }} />
       <Card.Body className="d-flex flex-column">
         <Card.Title>{project.title}</Card.Title>
         <Card.Text className="flex-grow-1">{project.description.substring(0, 100)}...</Card.Text>
