@@ -1,4 +1,4 @@
-// src/components/RegisterForm.js
+// src/components/RegisterForm.js (CORRIGÉ)
 import React, { useState } from 'react';
 import { Modal, Form, Button, Alert } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,6 +6,7 @@ import { register } from '../redux/actions';
 
 const RegisterForm = ({ show, onHide }) => {
   const [userData, setUserData] = useState({
+    name: '',        // AJOUTÉ
     email: '',
     password: '',
     role: 'user'
@@ -24,12 +25,7 @@ const RegisterForm = ({ show, onHide }) => {
   };
 
   return (
-    <Modal
-      show={show}
-      onHide={onHide}
-      centered
-      aria-labelledby="register-modal-title"
-    >
+    <Modal show={show} onHide={onHide} centered aria-labelledby="register-modal-title">
       <Modal.Header closeButton>
         <Modal.Title id="register-modal-title">Inscription</Modal.Title>
       </Modal.Header>
@@ -37,6 +33,18 @@ const RegisterForm = ({ show, onHide }) => {
         <Modal.Body>
           {error && <Alert variant="danger">{error}</Alert>}
           {success && <Alert variant="success">{success}</Alert>}
+
+          <Form.Group className="mb-3">
+            <Form.Label>Nom complet</Form.Label>
+            <Form.Control
+              type="text"
+              name="name"
+              value={userData.name}
+              onChange={handleChange}
+              placeholder="Jean-Sébastien Rakotonirina"
+              required
+            />
+          </Form.Group>
 
           <Form.Group className="mb-3">
             <Form.Label>Email</Form.Label>
@@ -58,7 +66,6 @@ const RegisterForm = ({ show, onHide }) => {
               value={userData.password}
               onChange={handleChange}
               minLength="6"
-              placeholder="6 caractères minimum"
               required
             />
           </Form.Group>
@@ -74,12 +81,8 @@ const RegisterForm = ({ show, onHide }) => {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary" onClick={onHide}>
-            Annuler
-          </Button>
-          <Button variant="primary" type="submit">
-            S'inscrire
-          </Button>
+          <Button variant="secondary" onClick={onHide}>Annuler</Button>
+          <Button variant="primary" type="submit">S'inscrire</Button>
         </Modal.Footer>
       </Form>
     </Modal>
