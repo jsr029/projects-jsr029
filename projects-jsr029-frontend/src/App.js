@@ -6,27 +6,27 @@ import HomePage from './pages/HomePage';
 import ProjectViewPage from './pages/ProjectViewPage';
 import ResumePage from './pages/ResumePage';
 import CustomNavbar from './components/CustomNavbar';
-import LoginForm from './components/LoginForm'; // Import the LoginForm component
+import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 
 function App() {
-    const [showLogin, setShowLogin] = useState(false);
-    const [showRegister, setShowRegister] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
 
-    return (
-        <Provider store={store}>
-            <Router>
-                <CustomNavbar setShowLogin={setShowLogin} setShowRegister={setShowRegister} />
-                <Routes>
-                    <Route exact path="/" element={<HomePage />} />
-                    <Route path="/cv" element={<ResumePage />} /> 
-                    <Route path="/project/:id" element={<ProjectViewPage />} />
-                </Routes>
-                <LoginForm show={showLogin} setShow={setShowLogin} /> {/* Use the LoginForm component */}
-                <RegisterForm show={showRegister} setShow={setShowRegister} /> {/* Use the LoginForm component */}
-            </Router>
-        </Provider>
-    );
+  return (
+    <Provider store={store}>
+      <Router>
+        <CustomNavbar setShowLogin={setShowLogin} setShowRegister={setShowRegister} />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/cv" element={<ResumePage />} />
+          <Route path="/project/:id" element={<ProjectViewPage />} />
+        </Routes>
+        <LoginForm show={showLogin} onHide={() => setShowLogin(false)} />
+        <RegisterForm show={showRegister} onHide={() => setShowRegister(false)} />
+      </Router>
+    </Provider>
+  );
 }
 
 export default App;

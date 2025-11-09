@@ -1,73 +1,40 @@
-import React, { useCallback } from 'react';
+import React from 'react';
+import { Navbar, Nav, Container } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { Navbar, Nav, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
 import { logout } from '../redux/actions';
+import { Link } from 'react-router-dom';
 
 const CustomNavbar = ({ setShowLogin, setShowRegister }) => {
-    const { isAuthenticated } = useSelector(state => state.auth);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const { isAuthenticated, user } = useSelector(state => state.auth);
+  const dispatch = useDispatch();
 
-    const handleLogout = useCallback(() => {
-        dispatch(logout());
-    }, [dispatch]);
-
-    const handleNavigate = useCallback((path) => {
-        navigate(path);
-    }, [navigate]);
-
-    return (
-        <Navbar expand={false} bg="dark" variant="dark" fixed="top" collapseOnSelect>
-            <Navbar.Brand onClick={() => handleNavigate('/')}>Mes Projets</Navbar.Brand>
-            <Navbar.Toggle aria-controls="navbar-nav" />
-            <Navbar.Collapse id="navbar-nav">
-                <Nav className="ml-auto">
-                    <Nav.Item className="custom-nav-item">
-                        <Button 
-                            variant="link"
-                            className="nav-button" 
-                            onClick={() => handleNavigate('/cv')}
-                        >
-                            CV
-                        </Button>
-                    </Nav.Item>
-                    {!isAuthenticated ? (
-                        <>
-                            <Nav.Item className="custom-nav-item">
-                                <Button 
-                                    variant="link" 
-                                    className="nav-button" 
-                                    onClick={() => setShowLogin(true)}
-                                >
-                                    Se Loguer
-                                </Button>
-                            </Nav.Item>
-                            <Nav.Item className="custom-nav-item">
-                                <Button 
-                                    variant="link" 
-                                    className="nav-button" 
-                                    onClick={() => setShowRegister(true)}
-                                >
-                                    S'enregistrer
-                                </Button>
-                            </Nav.Item>
-                        </>
-                    ) : (
-                        <Nav.Item className="custom-nav-item">
-                            <Button 
-                                variant="link" 
-                                className="nav-button" 
-                                onClick={handleLogout}
-                            >
-                                Sortir
-                            </Button>
-                        </Nav.Item>
-                    )}
-                </Nav>
-            </Navbar.Collapse>
-        </Navbar>
-    );
+  return (
+    <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
+      <Container>
+        <Navbar.Brand as={Link} to="/">JSR029</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link as={Link} to="/">Accueil</Nav.Link>
+            <Nav.Link as={Link} to="/cv">CV</Nav.Link>
+          </Nav>
+          <Nav>
+            {isAuthenticated ? (
+              <>
+                <Nav.Link disabled>{user?.role}</Nav.Link>
+                <Nav.Link onClick={() => dispatch(logout())}>Déconnexion</Nav.Link>
+              </>
+            ) : (
+              <>
+                <Nav.Link onClick={() => setShowLogin(true)}>Connexion</Nav.Link>
+                <Nav.Link onClick={() => setShowRegister(true)}>Inscription</Nav.Link>
+              </>
+            )}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
 };
 
 export default CustomNavbar;
