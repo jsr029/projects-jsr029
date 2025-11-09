@@ -1,29 +1,28 @@
 {
   "name": "projects-jsr029-backend",
   "version": "1.0.0",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js",
-    "prod": "node ./src/app.js"
+  "main": "app.js",
+  "engines": {
+    "node": "22.x"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon server.js",
+    "prod": "node app.js"
+  },
   "dependencies": {
-    "bcrypt": "^5.1.1",
+    "@vercel/blob": "^0.23.4",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.9.5",
+    "mongoose": "^8.6.1",
     "multer": "^1.4.5-lts.1",
-    "nodemailer": "^6.9.16",
-    "nodemailer-smtp-transport": "^2.7.4",
-    "nodemon": "^3.1.9",
-    "npm-check-updates": "^17.1.14",
-    "uuid": "^11.0.5"
+    "nodemailer": "^6.9.15",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
   }
 }

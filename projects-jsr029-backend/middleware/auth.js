@@ -1,14 +1,13 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/user');
 const dotenv = require('dotenv');
 dotenv.config();
 
 module.exports = function(req, res, next) {
     let token = req.headers["authorization"];
-    if (!token) return res.status(401).json({ msg: 'No token, authorization denied' });
+    if (!token) return res.status(401).json({ msg: 'No token' });
 
     if (token.startsWith('Bearer ')) {
-        token = token.slice(7, token.length).trimLeft();
+        token = token.slice(7).trimStart();
     }
 
     try {
@@ -16,21 +15,20 @@ module.exports = function(req, res, next) {
         req.user = decoded.user;
         next();
     } catch (err) {
-        console.error('Token verification error:', err);
-        res.status(401).json({ msg: 'Token is not valid', error: err.message });
+        res.status(401).json({ msg: 'Token invalide' });
     }
 };
 
-module.exports.isSuperAdmin = function(req, res, next) {
+module.exports.isSuperAdmin = (req, res, next) => {
     if (req.user.role !== 'superAdmin') {
-        return res.status(403).json({ msg: 'You do not have the required permission' });
+        return res.status(403).json({ msg: 'Accès refusé' });
     }
     next();
 };
 
-module.exports.isAdmin = function(req, res, next) {
-    if (req.user.role !== 'admin' && req.user.role !== 'superAdmin') {
-        return res.status(403).json({ msg: 'You do not have the required permission' });
+module.exports.isAdmin = (req, res, next) => {
+    if (!['admin', 'superAdmin'].includes(req.user.role)) {
+        return res.status(403).json({ msg: 'Accès refusé' });
     }
     next();
 };

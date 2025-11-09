@@ -1,104 +1,109 @@
+// routes/project.js
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
+const { put } = require('@vercel/blob');
 const Project = require('../models/project');
 const auth = require('../middleware/auth');
 const upload = require('../middleware/upload');
 
 const router = express.Router();
 
+// GET tous les projets
 router.get('/', async (req, res) => {
     try {
-        const projects = await Project.find();
+        const projects = await Project.find().sort({ createdAt: -1 });
         res.json(projects);
     } catch (err) {
-        console.error('Error fetching projects:', err);
-        res.status(500).send({ error: 'Server error' });
+        console.error('Erreur GET /api/projects:', err);
+        res.status(500).json({ error: 'Erreur serveur' });
     }
 });
 
-router.post('/create', auth, auth.isAdmin, upload.single('image'), async (req, res) => {
-    const { title, appUrl, techno, description } = req.body;
-    const imageUrl = `/images/${req.file.filename}`;
-    const newProject = new Project({
-        imageUrl,
-        title,
-        appUrl,
-        techno,
-        description,
-        userId: req.user.id
-    });
-
-    try {
-        const project = await newProject.save();
-        res.json(project);
-    } catch (err) {
-        console.error('Error creating project:', err);
-        res.status(500).send({ error: 'Server error' });
-    }
-});
-
+// GET un projet par ID
 router.get('/:id', async (req, res) => {
     try {
         const project = await Project.findById(req.params.id);
-        if (!project) {
-            return res.status(404).send({ error: 'Project not found.' });
-        }
+        if (!project) return res.status(404).json({ error: 'Projet non trouvé' });
         res.json(project);
     } catch (err) {
-        console.error('Error fetching project:', err);
-        res.status(500).send({ error: 'Server error' });
+        console.error('Erreur GET /api/projects/:id:', err);
+        res.status(500).json({ error: 'Erreur serveur' });
     }
 });
 
-router.put('/edit/:id', auth, auth.isAdmin, upload.single('image'), async (req, res) => {
-    const { title, appUrl, techno, description } = req.body;
-    const imageUrl = req.file ? `/images/${req.file.filename}` : undefined;
-    const updatedData = { title, appUrl, techno, description };
-
-    if (imageUrl) {
-        updatedData.imageUrl = imageUrl;
-    }
-
+// POST créer un projet (admin+)
+router.post('/create', auth, auth.isAdmin, upload.single('image'), async (req, res) => {
     try {
-        console.log(`Updating project with ID: ${req.params.id}`);
-        const project = await Project.findById(req.params.id);
-        if (!project) {
-            console.error(`Project with ID ${req.params.id} not found.`);
-            return res.status(404).send({ error: 'Project not found.' });
+        if (!req.file) return res.status(400).json({ error: 'Image requise' });
+
+        const { url } = await put(`projects/${Date.now()}-${req.file.originalname}`, req.file.buffer, {
+            access: 'public',
+            token: process.env.BLOB_READ_WRITE_TOKEN // Ajoute cette variable dans Vercel
+        });
+
+        const { title, appUrl, techno, description } = req.body;
+
+        const newProject = new Project({
+            imageUrl: url,
+            title,
+            appUrl,
+            techno,
+            description,
+            userId: req.user.id
+        });
+
+        const project = await newProject.save();
+        res.status(201).json(project);
+    } catch (err) {
+        console.error('Erreur POST /create:', err);
+        res.status(500).json({ error: 'Erreur serveur' });
+    }
+});
+
+// PUT modifier un projet
+router.put('/edit/:id', auth, auth.isAdmin, upload.single('image'), async (req, res) => {
+    try {
+        const updates = {
+            title: req.body.title,
+            appUrl: req.body.appUrl,
+            techno: req.body.techno,
+            description: req.body.description
+        };
+
+        if (req.file) {
+            const { url } = await put(`projects/${Date.now()}-${req.file.originalname}`, req.file.buffer, {
+                access: 'public',
+                token: process.env.BLOB_READ_WRITE_TOKEN
+            });
+            updates.imageUrl = url;
         }
 
-        console.log(`Found project: ${project}`);
-        const updatedProject = await Project.findByIdAndUpdate(req.params.id, updatedData, { new: true });
-        res.json(updatedProject);
+        const project = await Project.findByIdAndUpdate(
+            req.params.id,
+            updates,
+            { new: true }
+        );
+
+        if (!project) return res.status(404).json({ error: 'Projet non trouvé' });
+        res.json(project);
     } catch (err) {
-        console.error('Error updating project:', err);
-        res.status(500).send({ error: 'Server error' });
+        console.error('Erreur PUT /edit/:id:', err);
+        res.status(500).json({ error: 'Erreur serveur' });
     }
 });
 
+// DELETE supprimer un projet
 router.delete('/:id', auth, auth.isAdmin, async (req, res) => {
     try {
-        const project = await Project.findById(req.params.id);
-        if (!project) {
-            return res.status(404).send({ error: 'Project not found.' });
-        }
+        const project = await Project.findByIdAndDelete(req.params.id);
+        if (!project) return res.status(404).json({ error: 'Projet non trouvé' });
 
-        if (project.imageUrl) {
-            fs.unlink(path.join(__dirname, '..', project.imageUrl), (err) => {
-                if (err && err.code !== 'ENOENT') {
-                    console.error('Failed to delete image:', err);
-                } else if (err && err.code === 'ENOENT') {
-                    console.warn('Image not found, nothing to delete.');
-                }
-            });
-        }
+        // Optionnel : supprimer le blob (nécessite le handle du blob)
+        // await del(project.imageUrl);
 
-        await Project.findByIdAndDelete(req.params.id);
-        res.json({ msg: 'Project deleted' });
+        res.json({ msg: 'Projet supprimé' });
     } catch (err) {
-        console.error('Error deleting project:', err);
-        res.status(500).send({ error: 'Server error' });
+        console.error('Erreur DELETE /:id:', err);
+        res.status(500).json({ error: 'Erreur serveur' });
     }
 });
 
