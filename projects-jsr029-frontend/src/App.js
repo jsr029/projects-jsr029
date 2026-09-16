@@ -6,24 +6,35 @@ import HomePage from './pages/HomePage';
 import ProjectViewPage from './pages/ProjectViewPage';
 import ResumePage from './pages/ResumePage';
 import CustomNavbar from './components/CustomNavbar';
-import LoginForm from './components/LoginForm'; // Import the LoginForm component
+import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 
 function App() {
-    const [showLogin, setShowLogin] = useState(false);
-    const [showRegister, setShowRegister] = useState(false);
+    const [isLoginOpen, setIsLoginOpen] = useState(false);
+    const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
     return (
         <Provider store={store}>
             <Router>
-                <CustomNavbar setShowLogin={setShowLogin} setShowRegister={setShowRegister} />
+                <CustomNavbar 
+                    setShowLogin={setIsLoginOpen} 
+                    setShowRegister={setIsRegisterOpen} 
+                />
+                
                 <Routes>
-                    <Route exact path="/" element={<HomePage />} />
+                    <Route path="/" element={<HomePage />} />
                     <Route path="/cv" element={<ResumePage />} /> 
                     <Route path="/project/:id" element={<ProjectViewPage />} />
                 </Routes>
-                <LoginForm show={showLogin} setShow={setShowLogin} /> {/* Use the LoginForm component */}
-                <RegisterForm show={showRegister} setShow={setShowRegister} /> {/* Use the LoginForm component */}
+
+                <LoginForm 
+                    show={isLoginOpen} 
+                    setShow={setIsLoginOpen} 
+                />
+                <RegisterForm 
+                    show={isRegisterOpen} 
+                    setShow={setIsRegisterOpen} 
+                />
             </Router>
         </Provider>
     );
